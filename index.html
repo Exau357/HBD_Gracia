@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Huguette !</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Montserrat:wght@300;400;500&display=swap');
+
+        :root {
+            /* Palette CHIC & MODERNE */
+            --bg-color: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-light: #666666;
+            --accent-color: #C5A065; /* Or mat */
+            --card-bg: #F9F9F9;
+            --border-color: #E0E0E0;
+            
+            /* Polices */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: radial-gradient(#E0E0E0 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-out forwards;
+            background: #FFFFFF;
+            /* Padding ajusté pour laisser la place à la flèche en haut */
+            padding: 60px 20px 40px;
+            border-radius: 4px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        /* Le bouton retour */
+        .btn-retour {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: none; /* Masqué au départ */
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .btn-retour:hover {
+            color: var(--accent-color);
+            transform: translateX(-3px); /* Petit effet de glissement vers la gauche */
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            line-height: 1.2;
+            font-weight: 600;
+            letter-spacing: -1px;
+        }
+
+        header h1 span {
+            color: var(--accent-color);
+            font-style: italic;
+        }
+
+        .intro {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-interactif {
+            background-color: var(--text-dark);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn-interactif:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(197, 160, 101, 0.3);
+        }
+
+        /* Grille des voeux - Mobile First : 1 par ligne */
+        .voeux-container {
+            display: grid;
+            grid-template-columns: 1fr; 
+            gap: 20px;
+            display: none;
+            opacity: 0;
+            margin-top: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .carte {
+            background-color: var(--card-bg);
+            padding: 30px 25px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .carte::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .carte p {
+            font-family: var(--font-body);
+            font-size: 1.05rem;
+            font-weight: 400;
+            font-style: normal;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Desktop : 2 par ligne */
+        @media (min-width: 768px) {
+            .container {
+                padding: 80px 60px 60px; /* Plus d'espace sur grand écran */
+            }
+            .btn-retour {
+                top: 30px;
+                left: 30px;
+                font-size: 0.9rem;
+            }
+            header h1 {
+                font-size: 4rem;
+            }
+            .voeux-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .carte {
+                padding: 40px;
+            }
+            .carte:hover {
+                transform: translateY(-5px);
+                border-color: var(--accent-color);
+                box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="btn-retour" id="btn-retour">&#8592; Retour</button>
+
+        <header>
+            <h1>Joyeux Anniversaire <br><span>Huguette</span></h1>
+        </header>
+
+        <p class="intro">Une pensée sincère pour marquer cette journée :))</p>
+        <p class="intro">Idée peut-être banale mais très significative...</p>
+        <button class="btn-interactif" id="btn-surprise">Afficher les vœux</button>
+
+        <div class="voeux-container" id="voeux-container">
+            <div class="carte">
+                <p>Aujourd'hui, c'est ta journée, c'est la fête,<br>
+                Alors très joyeux anniversaire, Huguette !<br>
+                Que cette année t'apporte beaucoup de joie,<br>
+                Et de belles réussites autour de toi.</p>
+            </div>
+
+            <div class="carte">
+                <p>Je te souhaite une excellente santé,<br>
+                De la bonne humeur et de la gaieté.<br>
+                Que tes projets soient de francs succès,<br>
+                Et que ton quotidien soit rempli de paix.</p>
+            </div>
+
+            <div class="carte">
+                <p>Profite à fond de ce moment présent,<br>
+                Entourée de visages souriants.<br>
+                Je t'envoie ce message en toute amitié,<br>
+                Pour célébrer cette belle journée.</p>
+            </div>
+
+            <div class="carte">
+                <p>Encore une bougie de plus à souffler,<br>
+                Et une nouvelle page à commencer.<br>
+                Plein de bonnes choses pour l'avenir,<br>
+                Et surtout, n'oublie jamais de sourire !</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const btnSurprise = document.getElementById('btn-surprise');
+        const btnRetour = document.getElementById('btn-retour');
+        const voeuxContainer = document.getElementById('voeux-container');
+        const cartes = document.querySelectorAll('.carte');
+
+        // Action quand on clique sur "Afficher les vœux"
+        btnSurprise.addEventListener('click', () => {
+            btnSurprise.style.opacity = '0';
+            
+            setTimeout(() => {
+                btnSurprise.style.display = 'none';
+                
+                // Afficher le conteneur des vœux et le bouton retour
+                voeuxContainer.style.display = 'grid';
+                btnRetour.style.display = 'block';
+                
+                // Petit délai pour lancer les animations de fondu
+                setTimeout(() => {
+                    voeuxContainer.style.opacity = '1';
+                    btnRetour.style.opacity = '1';
+                    
+                    cartes.forEach((carte, index) => {
+                        // On réinitialise l'animation au cas où on a fait des allers-retours
+                        carte.style.animation = 'none'; 
+                        carte.offsetHeight; // Force le navigateur à relire le DOM pour relancer l'animation
+                        carte.style.animation = `slideUp 0.6s ease-out forwards ${index * 0.15}s`;
+                    });
+                }, 50);
+            }, 300);
+        });
+
+        // Action quand on clique sur "Retour"
+        btnRetour.addEventListener('click', () => {
+            voeuxContainer.style.opacity = '0';
+            btnRetour.style.opacity = '0';
+            
+            // On attend que le fondu de disparition se termine
+            setTimeout(() => {
+                voeuxContainer.style.display = 'none';
+                btnRetour.style.display = 'none';
+                
+                // Réinitialiser les cartes pour la prochaine fois
+                cartes.forEach(carte => {
+                    carte.style.opacity = '0';
+                    carte.style.animation = 'none';
+                });
+                
+                // Réafficher le bouton principal
+                btnSurprise.style.display = 'inline-block';
+                setTimeout(() => {
+                    btnSurprise.style.opacity = '1';
+                }, 50);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
